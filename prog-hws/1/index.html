@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas: HW 1</title>
+    <style type="text/css">
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+        <p id="penStatus">Pen down: </p>
+    <canvas>
+
+    </canvas>
+    <p id="nowDrawing">CLICK to begin drawing.</p>
+    <form>
+        <table style = "border: 1px solid black">
+            <tr bgcolor="#e0e0e0">
+                    <td><input type="radio" id = "r1" name="shape" value="line" checked = "checked"> Line </td>
+                    <td><input type="radio" id = "r2" name="shape" value="circle" > Circle</td>
+                    <td><input type="radio" id = "r3" name="shape" value="ellipse" > Ellipse  </td>
+            </tr>
+            <tr bgcolor="#e0e0e0">
+                    <td><input type="radio" id = "r4" name="shape" value="rect" > Rectangle </td>
+                    <td><input type="radio" id = "r5" name="shape" value="polyCl" > PolyClosed</td>
+                    <td><input type="radio" id = "r6" name="shape" value="polyOp" > PolyOpen  </td>
+            </tr>
+            <tr bgcolor="#f1f1f1">
+                <td>Line Thickness: </td><td><input type="range" id="rangeSlider" name = "thickness" min="1" max="4" value="1"></td>
+            </tr>
+            <tr bgcolor="#e0e0e0"> 
+                <td>Red: </td><td><input type="range" id="red" name = "thickness" min="0" max="255" value="0"></td>
+
+                <td>Green: </td><td><input type="range" id="green" name = "thickness" min="0" max="255" value="150"></td>
+            
+                <td>Blue: </td><td><input type="range" id="blue" name = "thickness" min="0" max="255" value="255"></td>
+            </tr>
+        </table>
+    </form> 
+    
+    <script src ="canvas_draw.js"></script>
+</body>
+</html>
