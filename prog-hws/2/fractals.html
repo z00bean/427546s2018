@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fractal</title>
+    <style>
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+                background-color: #fcfcfc;
+            }
+            table {
+                border-collapse: collapse;
+                width: 700px;
+            }
+
+            table, th, td {
+                border: 1px solid black;
+                padding: 4px;
+                text-align: left;
+            }
+    </style>
+</head>
+<body>
+        <h3>FRACTALS assignment  &nbsp; &nbsp; <a href = "index.html">Go to index</a> &nbsp; &nbsp; <a href = "wheel.html">Go to WHEEL assignment</a></h3>
+    <canvas id='canvas' width=800 height=550 style="border:1px solid #b0b0b0;"></canvas></canvas>
+
+    <p id ="pMessage">Fractals! If the iteration/ratio value is set over 6, the processing might be slow.</p>
+    <table border="1">
+        <tr>
+            <td>
+                    Line: <input type="radio" id="radioLine" name="type" checked="true">
+            </td>
+            <td  colspan="2">
+                    Arc: <input type="radio" id="radioArc" name="type">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                    Ratio: 1/<input type="text" id="txtRatio" value="2"><br>
+            </td>
+            <td  colspan="2">
+                    (insert integer greater than 1)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                    Iterations: <input type="text" id="txtIterations" value="4"/>
+            </td>
+            <td  colspan="2">
+                (type an integer with value 1 or more)
+            </td>
+        </tr>
+        <tr>
+                <td  colspan="2">
+                    Thickness: 1<input type="range" min="1" max="6" value="1" id ="sldThickness">6
+                </td>
+        </tr>
+        <tr>
+                <td>
+                        <button id ="btnDrawFrac" onclick="main();">Draw Fractal</button>
+
+                        <button id = "btnNextIter" onclick="drawLinesPointToPoint();" style="visibility:hidden">Draw NEXT iteration</button>
+                </td>
+                <td>
+                        <input type="button" value="Reset canvas" id ="btnClear" onclick="clrCanvas();">
+                </td>
+            </tr>
+    </table>
+    
+    <script src ="f1.js"></script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wheel</title>
+    <style>
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+                background-color: #fcfcfc;
+            }
+            table {
+                border-collapse: collapse;
+                width: 700px;
+            }
+
+            table, th, td {
+                border: 1px solid black;
+                padding: 4px;
+                text-align: left;
+            }
+    </style>
+</head>
+<body>
+    <h3>WHEEL assignment   &nbsp; &nbsp; <a href = "index.html">Go to index</a>  &nbsp; &nbsp; <a href = "fractals.html">Go to FRACTAL assignment</a></h3>
+    <canvas id='canvas' width=700 height=480 style="border:1px solid #b0b0b0;"></canvas></canvas>
+
+    <p id ="pMessage">Click the "Draw wheel" button!</p>
+    <table border="1">
+        <tr>
+            <td>
+                    SCORE: <input type="text" id="txtScore" value="12"><br>
+            </td>
+            <td  colspan="2">
+                    (value between 0 and 100)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                    RADIUS: <input type="text" id="txtRadius" value="90"/>
+            </td>
+            <td  colspan="2">
+                (value between 10 and 100)
+            </td>
+        </tr>
+        <tr>
+            <td  colspan="2">
+                Thickness: 1<input type="range" min="1" max="8" value="2" id ="sldThickness">8
+            </td>
+            <td>
+                    Fill wheel: <input id="chkColor" type="checkbox" onclick="fillWheel()">
+            </td>
+        </tr>
+        <tr>
+                <td>Red: 0<input type="range" id="red" name = "sldRed" min="0" max="255" value="0">255</td>
+
+                <td>Green: 0<input type="range" id="green" name = "sldGreen" min="0" max="255" value="0">255</td>
+            
+                <td>Blue: 0<input type="range" id="blue" name = "sldBlue" min="0" max="255" value="150">255</td>
+            
+            </tr>
+        <tr>
+                <td>
+                        <input type="button" value="Draw WHEEL!" onclick="drawWheel();">
+                </td>
+                <td>
+                        <input type="button" value="Clear canvas" id ="btnClear" onclick="clrCanvas();">
+                </td>
+            </tr>
+    </table>
+    
+    <script src ="wheel.js"></script>
+</body>
+</html>
