@@ -19,3 +19,5 @@ Libraries: THREE.js (over WebGL)
 Use Firefox, Chrome or Safati (old browsers might not support
 WebGL.)
 https://caniuse.com/#feat=webgl
+
+The project is hosted here: http://www.cs.uml.edu/~zbhuyan/427546s2018/finalProject/
