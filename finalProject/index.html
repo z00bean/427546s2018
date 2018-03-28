@@ -1,0 +1,25 @@
+<html lang="en">
+	<head>
+		<title>CG PROJECT</title>
+		<script src="js/three.js"></script>
+		<script src="js/OrbitControls.js"></script>
+	</head>
+	<body scroll="no" style="overflow: hidden">
+		<div style="background-color:#cbcbff">
+				<table border="1">
+					<tr>
+						<td>Ambient Lights: <input type="checkbox" id="chkAmbLight" onchange="setAmbLight()"></td>
+						<td>Directional Lights: <input type="checkbox" id="chkDirLight" onchange="setDirLight()"></td>
+						 <td>Auto-rotate: <input type="checkbox" id="chkRotate" onchange="setRotate()"></td>
+						 <td rowspan="2"><a href ="report.pdf" target="_blank">Report.pdf</a></td>
+						 <td rowspan="2"><a href="manual.pdf" target="_blank">Manual.pdf</a></td>
+					</tr>
+					<tr>
+						<td colspan="3">Click+Drag/Scroll/Arrows</td>
+					</tr>
+				</table>
+		</div>
+		
+		<script src="js/cgProject.js"></script>
+	</body>
+</html>
