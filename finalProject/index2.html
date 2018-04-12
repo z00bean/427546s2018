@@ -1,0 +1,55 @@
+<html lang="en">
+	<head>
+		<title>CG PROJECT</title>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<script src="js/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+
+		<script src="js/three.js"></script>
+		<script src="js/OrbitControls.js"></script>
+	</head>
+	<body >
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col" style="background-color:#9ac5fd">
+						<table class="table table-bordered">
+							<tr>
+								<td>Ambient Lights: <input type="checkbox" id="chkAmbLight" onchange="setAmbLight()" checked></td>
+								<td>Directional Lights: <input type="checkbox" id="chkDirLight" onchange="setDirLight()"></td>
+								<td>Shadow: <input type="checkbox" id="chkShadow" onchange="setShadow()"></td>
+								<td>
+									<form>
+											Camera type:
+											<input type="radio" name="colors" id="ortho" checked onchange="setCameraType()">Ortho
+											<input type="radio" name="colors" id="perspective" onchange="setCameraType()">Perspective
+									</form>
+								</td>
+							</tr>
+							<tr>
+								<td>Auto-rotate: <input type="checkbox" id="chkRotate" onchange="setRotate()"></td>
+								<td>Shear:
+									X-Y:<input type="checkbox" id="chkShearXY" onchange="setShearStatusXY()">
+									Y-Z:<input type="checkbox" id="chkShearYZ" onchange="setShearStatusYZ()">
+									Z-X-<input type="checkbox" id="chkShearZX" onchange="setShearStatusZX()">
+								</td>
+								<td>Orientation lines: <input type="checkbox" id="chkHelper" onchange="setHelper()" checked></td>
+								<td>Translate: Right click and Drag<br/>Rotate: Left click and Drag</td>
+							</tr>
+							<tr>
+								<td colspan="3"><u>Translate</u>: Right click and drag. <u>Rotate</u>: Left click and Drag</td>
+								<td>*<a href ="index.html">Full view webpage</a></td>
+							</tr>
+						</table>
+				</div>
+		</div>
+		<div class="row ">
+				<div class = "col" id = "4">
+				</div>	
+		</div>
+		<script src="js/cgProject2.js"></script>
+		</div>
+	</body>
+</html>
