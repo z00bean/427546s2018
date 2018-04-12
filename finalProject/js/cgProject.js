@@ -40,13 +40,24 @@ img3.src = '../img/top.png';
 //end side, top views
 
 var scene = new THREE.Scene();
-var scene1 = new THREE.Scene();
 var camera;
 //camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
-camera = new THREE.OrthographicCamera((window.innerWidth/150) / - 2, (window.innerWidth/150) / 2, (window.innerHeight/150) / 2, (window.innerHeight/150) / - 2, .1, 1000 );
+camera = new THREE.OrthographicCamera((window.innerWidth/150) / - 2, (window.innerWidth/150) / 2, (window.innerHeight/150) / 2, (window.innerHeight/150) / - 2, .1, 700 );
 camera.position.z = 4;
 
 var renderer = new THREE.WebGLRenderer({antialias:true});
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+//renderer.shadowMapType = THREE.PCFShadowMap; 
+/*
+renderer.shadowCameraNear = 3;
+renderer.shadowCameraFar = camera.far;
+renderer.shadowCameraFov = 50;
+renderer.shadowMapBias = 0.0039;
+renderer.shadowMapDarkness = 0.5;
+renderer.shadowMapWidth = 1024;
+renderer.shadowMapHeight = 1024;
+*/
 
 var rotateStatus = 0;
 var ambLightStatus = 1;
@@ -57,6 +68,8 @@ var shearXY = 0;
 var shearYZ = 0;
 var shearZX = 0;
 var shearChanged = 0;
+var shadowStatus = 0;
+var helperStatus = 1;
 
 //SHEAR variables
 var Syx = 0,
@@ -67,10 +80,10 @@ var Syx = 0,
     Syz = 0;
 
 // renderer clear color
-renderer.setClearColor("#000000");
-
+renderer.setClearColor("#b0b0b0");
 //renderer.setSize( document.getElementById('4').style.width, document.getElementById('4').style.height );
 renderer.setSize( window.innerWidth/4, window.innerHeight/4 );
+renderer.shadowMap.enabled = true;
 
 window.addEventListener('resize', function(){
   //var width = document.getElementById('4').style.width;
@@ -81,6 +94,26 @@ window.addEventListener('resize', function(){
   camera.aspect = width/height;
   camera.updateProjectionMatrix();
 });
+
+function setHelper(){
+  if(document.getElementById("chkHelper").checked == true){
+    helperStatus = 1;
+  }
+  else{
+    helperStatus = 0;
+  }
+  console.log("Shadow status:"+shadowStatus)
+};
+
+function setShadow(){
+  if(document.getElementById("chkShadow").checked == true){
+    shadowStatus = 1;
+  }
+  else{
+    shadowStatus = 0;
+  }
+  console.log("Shadow status:"+shadowStatus)
+};
 
 function setAmbLight(){
   if(document.getElementById("chkAmbLight").checked == true){
@@ -152,6 +185,19 @@ container.appendChild(renderer.domElement);
 
 //document.body.appendChild( renderer.domElement );
 
+
+//Create a plane that receives shadows (but does not cast them)
+var planeGeometry = new THREE.PlaneBufferGeometry( 20, 20, 32, 32 );
+var planeMaterial = new THREE.MeshLambertMaterial( { color: 0x009090, side: THREE.DoubleSide } )
+var plane = new THREE.Mesh( planeGeometry, planeMaterial );
+plane.receiveShadow = true;
+//plane.rotation.x = -0.5 * Math.PI;
+plane.position.z = -2.5;
+
+scene.add( plane );
+
+
+
 // cube setup
 var geometry = new THREE.BoxGeometry( 2, 2.5, 2 );
 
@@ -165,7 +211,6 @@ var cubeMaterials = [
 ];
 
 
-
 //Light needed for MeshPhongMaterial!!
 var light = new THREE.DirectionalLight( 0xffffff, .4 );
 light.position.set( 0, 1, 1 ).normalize();
@@ -175,6 +220,8 @@ scene.add(light);
 var material = new THREE.MeshFaceMaterial(cubeMaterials);
 var cube = new THREE.Mesh( geometry, material );
 
+cube.castShadow = true;
+
 cube.rotation.x += 0;
 cube.rotation.y += .8;
 cube.rotation.z += .7;
@@ -183,24 +230,49 @@ scene.add( cube );
 
 //Lighting stuff
 var ambientLight = new THREE.AmbientLight(0x9F9F9F, 0.7);
-//scene.add(ambientLight);
+//ambientLight.castShadow = true; //Ambient light doesn't cast shadows!!
+scene.add(ambientLight);
 
 var spotLight;
-spotLight = new THREE.SpotLight( 0xffffff );
-spotLight.position.set( 0, 90, 650 );
+spotLight = new THREE.SpotLight( 0xffffff, 0.9 );
+//spotLight.position.set( 0, 90, 650 );
+spotLight.position.set( 100, 10, 200 );
+spotLight.castShadow = true;
 scene.add( spotLight );
 
 var dirLight1;
 dirLight1 = new THREE.DirectionalLight(0xFFFFFF, 0.4, 800);
 dirLight1.target = cube;
-//scene.add(dirLight1);
+dirLight1.castShadow = true;
+scene.add(dirLight1);
 
-var dirLight3;
-dirLight3 = new THREE.DirectionalLight(0xFFFFFF, 0.4, 5);
-dirLight3.position.set(400, -200, -100);
-dirLight3.target = cube;
+var dirLight2;
+dirLight2 = new THREE.DirectionalLight(0xFFFFFF, 0.4, 5);
+dirLight2.position.set(400, -200, -100);
+dirLight2.target = cube;
+dirLight2.castShadow = true;
+
+var helper = new THREE.CameraHelper( light.shadow.camera );
+//scene.add( helper );
 
 var update = function(){
+
+  if(helperStatus == 1){
+    scene.add( helper );
+  }
+  else{
+    scene.remove( helper );
+  }
+
+  if(shadowStatus == 1){
+    plane.receiveShadow = true;
+    plane.material.needsUpdate = true;
+  }
+  else{
+    plane.receiveShadow = false;
+    plane.material.needsUpdate = true;
+  }
+
   if(cameraTypeChanged == 1){
       if(cameraType == 0)
         camera = new THREE.OrthographicCamera((window.innerWidth/150) / - 2, (window.innerWidth/150) / 2, (window.innerHeight/150) / 2, (window.innerHeight/150) / - 2, .1, 1000 );
@@ -249,15 +321,15 @@ if(rotateStatus == 1){
 
   if(lightStatus == 1){
     scene.add(dirLight1);
-    scene.add(dirLight3);
+    scene.add(dirLight2);
     dirLight1.position.copy( camera.position );
-    dirLight3.position.copy( camera.position );
+    //dirLight2.position.copy( camera.position );
 
     console.log("inside renderer: light status");
   }
   else{
     scene.remove(dirLight1);
-    scene.remove(dirLight3);
+    //scene.remove(dirLight2);
   }
 };
 
