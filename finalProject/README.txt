@@ -1,10 +1,10 @@
 CG project:
-Submission 3
+Submission 4
 
-Week3 updates:
-1. Anti-Aliasing
-2. Shadow rendering
-3. Orientation lines
+Week4 updates:
+1. Ground added
+2. Grass texture on ground
+3. Auto Camera Rotation
 
 There are checkboxes, respectively for enabling (or disabling) features:
 	Ambient light (Switched on by default)
