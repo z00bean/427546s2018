@@ -2,9 +2,11 @@
 var scene = new THREE.Scene();
 var camera;
 //camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
-camera = new THREE.OrthographicCamera((window.innerWidth/150) / - 2 , (window.innerWidth/150) / 2, (window.innerHeight/150) / 2, (window.innerHeight/150) / - 2, .1, 700 );
-camera.position.z = 4;
-
+//camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+camera = new THREE.OrthographicCamera((window.innerWidth/150) / - 2 , (window.innerWidth/150) / 2, (window.innerHeight/150) / 2, (window.innerHeight/150) / - 2, .1, 1200 );
+//camera.position.z = 4;
+//camera.position.set( 90, 75, 100);
+camera.position.set( 60, 10, 15);
 var renderer = new THREE.WebGLRenderer({antialias:true});
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -24,12 +26,13 @@ var ambLightStatus = 1;
 var lightStatus = 0;
 var cameraTypeChanged = 0;
 var cameraType = 0; //0 for otho, 1 for perspective
+var autoRotateCamera = 0;
 var shearXY = 0;
 var shearYZ = 0;
 var shearZX = 0;
 var shearChanged = 0;
 var shadowStatus = 0;
-var helperStatus = 1;
+var helperStatus = 0;
 
 //SHEAR variables
 var Syx = 0,
@@ -40,7 +43,7 @@ var Syx = 0,
     Syz = 0;
 
 // renderer clear color
-renderer.setClearColor("#b0b0b0");
+renderer.setClearColor("#d0d0fa");
 //renderer.setSize( document.getElementById('4').style.width, document.getElementById('4').style.height );
 renderer.setSize( window.innerWidth, window.innerHeight );
 renderer.shadowMap.enabled = true;
@@ -48,12 +51,21 @@ renderer.shadowMap.enabled = true;
 window.addEventListener('resize', function(){
   //var width = document.getElementById('4').style.width;
   //var height = document.getElementById('4').style.height;
-  var width = window.innerWidth/4;
-  var height = window.innerHeight/4;
+  var width = window.innerWidth;
+  var height = window.innerHeight;
   renderer.setSize(width, height);
   camera.aspect = width/height;
   camera.updateProjectionMatrix();
 });
+
+function setRotateCamera(){
+  if(document.getElementById("chkRotateCamera").checked == true){
+    autoRotateCamera = 1;
+  }
+  else{
+    autoRotateCamera = 0;
+  }
+};
 
 function setHelper(){
   if(document.getElementById("chkHelper").checked == true){
@@ -64,7 +76,6 @@ function setHelper(){
   }
   console.log("Shadow status:"+shadowStatus)
 };
-
 function setShadow(){
   if(document.getElementById("chkShadow").checked == true){
     shadowStatus = 1;
@@ -139,6 +150,7 @@ function setShearStatusZX(){
 };
 
 controls = new THREE.OrbitControls(camera, renderer.domElement);
+controls.autoRotate = true;
 
 var container = document.getElementById('4');
 container.appendChild(renderer.domElement);
@@ -147,12 +159,22 @@ container.appendChild(renderer.domElement);
 
 
 //Create a plane that receives shadows (but does not cast them)
+//Create grass
+var grassTex = THREE.ImageUtils.loadTexture('img/grass.jpg'); 
+grassTex.wrapS = THREE.RepeatWrapping; 
+grassTex.wrapT = THREE.RepeatWrapping; 
+grassTex.repeat.x = 300; 
+grassTex.repeat.y = 225;
+
 var planeGeometry = new THREE.PlaneBufferGeometry( 20, 20, 32, 32 );
-var planeMaterial = new THREE.MeshLambertMaterial( { color: 0x009090, side: THREE.DoubleSide } )
+//var planeMaterial = new THREE.MeshLambertMaterial( { color: 0x009090, side: THREE.DoubleSide } )
+var planeMaterial = new THREE.MeshLambertMaterial( { map: grassTex, side: THREE.DoubleSide } )
 var plane = new THREE.Mesh( planeGeometry, planeMaterial );
 plane.receiveShadow = true;
 //plane.rotation.x = -0.5 * Math.PI;
-plane.position.z = -2.5;
+//plane.position.z = -2.5;
+plane.rotation.x = -0.5 * Math.PI;
+plane.position.y = -1.25;
 
 scene.add( plane );
 
@@ -182,9 +204,9 @@ var cube = new THREE.Mesh( geometry, material );
 
 cube.castShadow = true;
 
-cube.rotation.x += 0;
-cube.rotation.y += .8;
-cube.rotation.z += .7;
+//cube.rotation.x += 0;
+//cube.rotation.y += .8;
+//cube.rotation.z += .7;
 scene.add( cube );
 
 
@@ -234,14 +256,18 @@ var update = function(){
   }
 
   if(cameraTypeChanged == 1){
-      if(cameraType == 0)
+      if(cameraType == 0){
         camera = new THREE.OrthographicCamera((window.innerWidth/150) / - 2, (window.innerWidth/150) / 2, (window.innerHeight/150) / 2, (window.innerHeight/150) / - 2, .1, 1000 );
-     else
+        camera.position.set( 60, 10, 15);
+      }
+      else{
         camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
-    camera.position.z = 4;
+        camera.position.set( 5, 4.5, 3.5);
+     }
      camera.aspect = (window.innerWidth/4)/(window.innerHeight/4);
      camera.updateProjectionMatrix();
      controls = new THREE.OrbitControls(camera, renderer.domElement);
+     controls.autoRotate = true;
      cameraTypeChanged = 0;
   }
 
@@ -291,6 +317,8 @@ if(rotateStatus == 1){
     scene.remove(dirLight1);
     //scene.remove(dirLight2);
   }
+  if(autoRotateCamera == 1){
+    controls.update();}
 };
 
 var render = function () {
