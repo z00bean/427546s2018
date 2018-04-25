@@ -20,7 +20,7 @@
 								<td>Ambient Lights: <input type="checkbox" id="chkAmbLight" onchange="setAmbLight()" checked></td>
 								<td>Directional Lights: <input type="checkbox" id="chkDirLight" onchange="setDirLight()"></td>
 								<td>Shadow: <input type="checkbox" id="chkShadow" onchange="setShadow()"></td>
-								<td>
+								<td colspan="2">
 									<form>
 											Camera type:
 											<input type="radio" name="colors" id="ortho" checked onchange="setCameraType()">Ortho
@@ -30,7 +30,7 @@
 							</tr>
 							<tr>
 								<td>Auto-rotate house: <input type="checkbox" id="chkRotate" onchange="setRotate()"></td>
-								<td>Camera rotation: <input type="checkbox" id="chkRotateCamera" onchange="setRotateCamera()"></td>
+								<td>Rotate camera: <input type="checkbox" id="chkRotateCamera" onchange="setRotateCamera()"></td>
 								<td>Shear:
 									X-Y:<input type="checkbox" id="chkShearXY" onchange="setShearStatusXY()">
 									Y-Z:<input type="checkbox" id="chkShearYZ" onchange="setShearStatusYZ()">
@@ -42,8 +42,8 @@
 							<tr>
 								<td colspan="2"><u>Translate</u>: Right click and drag. <u>Rotate</u>: Left click and Drag</td>
 								<td>*<a href ="index2.html"><b>VIEW only 3D</b></a></td>
-								<td><a href ="reportWeek4.pdf" target ="_blank"><b>REPORT</b></a></td>
-								<td><a href ="manualWeek4.pdf" target ="_blank"><b>Manual</b></a></td>
+								<td>*<a href ="reportWeek5.pdf" target = "_blank"><b>REPORT</b></a></td>
+								<td>*<a href ="manualWeek5.pdf" target = "_blank"><b>Manual</b></a></td>
 							</tr>
 						</table>
 				</div>
@@ -54,15 +54,15 @@
 				<br/><br/><br/>
 			</div>
 			<div class = "col" id = "2">
-				<canvas style="height:200px" id ="canvas2"/>
+				<canvas style="height:250px" id ="canvas2"/>
 				<br/><br/><br/>
 			</div>	
 		</div>
 		<div class="row ">
 				<div class = "col" id = "3">
-					<canvas style="height:200px" id ="canvas3"/>
+					<canvas style="height:250px" id ="canvas3"/>
 				</div>
-				<div class = "col" id = "4">
+				<div class = "col" id = "4" style="height:250px; width: 300px;">
 				</div>	
 		</div>
 		<script src="js/cgProject.js"></script>
