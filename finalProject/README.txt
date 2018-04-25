@@ -1,10 +1,11 @@
 CG project:
-Submission 4
+Submission 5
 
-Week4 updates:
-1. Ground added
-2. Grass texture on ground
-3. Auto Camera Rotation
+Week5 updates:
+1. Merged a quad pyramid (roof) and with the previous structure.
+2. Option to resize house width and breadth.
+	2.1 Resize house size from the side view and front view window.
+	2.2 Side, front and top views reflect the actual dimension of the house.
 
 There are checkboxes, respectively for enabling (or disabling) features:
 	Ambient light (Switched on by default)
@@ -17,6 +18,9 @@ Mouse controls
 	Scene Rotation/Orbit: Left click and drag
 	Translation: Right click and drag
 	Zoom in/out: Scroll
+
+Size controls
+	Click on the side view or front view canvases to resize along the X or Z axis.
 
 Libraries: THREE.js (over WebGL), Bootstrap
 
