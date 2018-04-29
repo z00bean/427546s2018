@@ -1,11 +1,4 @@
 CG project:
-Submission 5
-
-Week5 updates:
-1. Merged a quad pyramid (roof) and with the previous structure.
-2. Option to resize house width and breadth.
-	2.1 Resize house size from the side view and front view window.
-	2.2 Side, front and top views reflect the actual dimension of the house.
 
 There are checkboxes, respectively for enabling (or disabling) features:
 	Ambient light (Switched on by default)
@@ -21,6 +14,8 @@ Mouse controls
 
 Size controls
 	Click on the side view or front view canvases to resize along the X or Z axis.
+
+In the webpage with only 3D view canvas, there is an additional option to move the camera and view one, two or three vanishing points (when perspective camera is selected).
 
 Libraries: THREE.js (over WebGL), Bootstrap
 
