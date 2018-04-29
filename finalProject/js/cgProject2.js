@@ -33,6 +33,8 @@ var shearZX = 0;
 var shearChanged = 0;
 var shadowStatus = 0;
 var helperStatus = 0;
+var vanishingPointChanged = 0;
+var vanishingPoint = "select";
 
 //SHEAR variables
 var Syx = 0,
@@ -65,6 +67,11 @@ function setRotateCamera(){
   else{
     autoRotateCamera = 0;
   }
+};
+
+function setVanishingPoint(){
+  vanishingPointChanged = 1;
+  vanishingPoint = document.getElementById("selectVanishingPoint").value;
 };
 
 function setHelper(){
@@ -279,6 +286,19 @@ var helper = new THREE.CameraHelper( light.shadow.camera );
 
 var update = function(){
 
+  if(vanishingPointChanged == 1){
+    vanishingPointChanged = 0;
+    if(vanishingPoint == "1"){
+      camera.position.set( 2.8, 2.5, 0);  //1 point
+      //camera.translateY(-4);
+    }
+    else if(vanishingPoint == "2")
+      camera.position.set( 2, 0, 2);  //2 point
+    else if(vanishingPoint == "3")
+      camera.position.set( 3, 3, 3);  //3 point
+      controls.update();
+    document.getElementById('selectVanishingPoint').value = "select";
+}
   if(helperStatus == 1){
     scene.add( helper );
   }
@@ -299,10 +319,12 @@ var update = function(){
       if(cameraType == 0){
         camera = new THREE.OrthographicCamera((window.innerWidth/150) / - 2, (window.innerWidth/150) / 2, (window.innerHeight/150) / 2, (window.innerHeight/150) / - 2, .1, 1000 );
         camera.position.set( 60, 10, 15);
+        document.getElementById('selectVanishingPoint').disabled = true;
       }
       else{
         camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
         camera.position.set( 5, 4.5, 3.5);
+        document.getElementById('selectVanishingPoint').disabled = false;
      }
      camera.aspect = (window.innerWidth/4)/(window.innerHeight/4);
      camera.updateProjectionMatrix();
