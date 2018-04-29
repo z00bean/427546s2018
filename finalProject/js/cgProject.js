@@ -24,7 +24,7 @@ function mouseDownC1(canvas, evt) {
   console.log("canvas width:"+canvas.width + " canvas height: " + canvas.height);
   ctx1.fillStyle="#000000";
   ctx1.font = "9px Arial";
-  ctx1.fillText("Front View",255,10);
+  ctx1.fillText("(CLICK) Front View",220,10);
 
   updateTopView();
 }
@@ -41,7 +41,7 @@ ctx1.fillRect(0, 0, c1.width, c1.height);
 var img1 = new Image();
 ctx1.fillStyle="#000000";
 ctx1.font = "9px Arial";
-ctx1.fillText("Front View",255,10);
+ctx1.fillText("(CLICK) Front View",220,10);
 img1.onload = function() {
 
   ctx1.drawImage(img1, 0, 0, c1.width/2.5, c1.height-10);
@@ -74,7 +74,7 @@ function mouseDownC2(canvas, evt) {
   console.log("canvas width:"+canvas.width + " canvas height: " + canvas.height);
   ctx2.fillStyle="#000000";
   ctx2.font = "9px Arial";
-  ctx2.fillText("Side view",255,10);
+  ctx2.fillText("(CLICK) Side view",220,10);
 
   updateTopView();
 }
@@ -91,7 +91,7 @@ ctx2.fillRect(0, 0, c2.width, c2.height);
 var img2 = new Image();
 ctx2.fillStyle="#000000";
 ctx2.font = "9px Arial";
-ctx2.fillText("Side view",255,10);
+ctx2.fillText("(CLICK) Side view",220,10);
 img2.onload = function() {
 
   ctx2.drawImage(img2, 0, 0, c2.width/2.5, c2.height-10);
